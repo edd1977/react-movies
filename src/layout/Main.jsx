@@ -23,7 +23,7 @@ export class Main extends React.Component {
   }
 
   searchUpdate(search, movie_type) {
-    const url = new URL('http://www.omdbapi.com/');
+    const url = new URL('https://www.omdbapi.com/');
     const params = {
       apikey: API_KEY,
       type: movie_type === 'all' ? undefined : movie_type,
@@ -39,6 +39,13 @@ export class Main extends React.Component {
       .then(data => {
         this.setState({
           movies: data.Search || [],
+          loading: false,
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({
+          movies: [],
           loading: false,
         });
       });
